@@ -42,6 +42,10 @@ class similarity_index_of_label_graph_class(object):
         similarity_index : float
             Similarity index of G1 and G2 graph pairs. The range is [-1, 1].
         
+        Notes
+        ------
+        The time complexity of this algorithm is O(n^2*log(n) + n*m), where n is the number of nodes and m the number of edges in the graph.
+        
         Examples
         --------
         >>> from networkx.generators.directed import gnr_graph
@@ -66,7 +70,7 @@ class similarity_index_of_label_graph_class(object):
     from networkx.classes.multigraph import MultiGraph
     from networkx.classes.multidigraph import MultiDiGraph
     
-    version = '0.9.9'
+    version = '1.0.0'
     
     def __graph_embedding_vector(self, G, weight = None) -> dict:
         def convert_graph_to_node_frequence(G, weight = None) -> dict:
