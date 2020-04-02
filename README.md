@@ -13,6 +13,7 @@
 ![PyPI - License](https://img.shields.io/pypi/l/similarity-index-of-label-graph)
 
 *calculate the similarity index of the label graph pairs package in python.*
+
 Can be used for weighted/unweighted and directed/undirected networks.
 
 ## Installation
