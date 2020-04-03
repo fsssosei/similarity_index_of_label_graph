@@ -23,7 +23,7 @@ with open("README.md", encoding='utf-8') as fh:
 
 setup(
     name='similarity_index_of_label_graph',
-    version='1.0.1',
+    version='1.0.2',
     description='calculate the similarity index of the label graph pairs package in python.',
     long_description=long_description,
     long_description_content_type='text/markdown',
