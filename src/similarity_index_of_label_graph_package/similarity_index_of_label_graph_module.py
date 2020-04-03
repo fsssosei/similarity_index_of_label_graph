@@ -31,7 +31,7 @@ class similarity_index_of_label_graph_class(object):
         Parameters
         ----------
         G1, G2 : graphs
-        A pair of graphs for calculating similarity.
+            A pair of graphs for calculating similarity.
         
         weight : string or None, optional (default=None)
             The edge attribute that holds the numerical value used as a weight.
