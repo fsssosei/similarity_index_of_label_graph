@@ -71,7 +71,7 @@ class similarity_index_of_label_graph_class(object):
     from networkx.classes.multigraph import MultiGraph
     from networkx.classes.multidigraph import MultiDiGraph
     
-    version = '1.0.1'
+    version = '1.0.2'
     
     def __graph_embedding_vector(self, G, weight = None) -> dict:
         def convert_graph_to_node_frequence(G, weight = None) -> dict:
