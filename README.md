@@ -38,10 +38,10 @@ Example:
 	>>> G4 = spectral_graph_forge(G2, 0.6, seed = 65535)
 	>>> similarity_index_of_label_graph = similarity_index_of_label_graph_class()
 	>>> similarity_index_of_label_graph(G1, G2)
-	0.5925135061949895
+	0.7651719671571124
 	>>> similarity_index_of_label_graph(G1, G3)
-	-0.9677390108526409
+	-0.8580896120374933
 	>>> similarity_index_of_label_graph(G2, G4)
-	-0.9041961423870752
+	-0.8440113193737153
 	>>> similarity_index_of_label_graph(G3, G4)
-	0.5359512772554542
+	0.7314483604914666
