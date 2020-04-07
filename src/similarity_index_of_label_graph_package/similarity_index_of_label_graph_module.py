@@ -41,7 +41,7 @@ class similarity_index_of_label_graph_class(object):
         -------
         similarity_index : float
             Similarity index of G1 and G2 graph pairs. The range is [-1, 1].
-        
+            
         Notes
         ------
         Weights can only be non-negative. If all edges have a "weight" item, make sure that at least one "weight" item has a value greater than zero.
@@ -57,13 +57,13 @@ class similarity_index_of_label_graph_class(object):
         >>> G4 = spectral_graph_forge(G2, 0.6, seed = 65535)
         >>> similarity_index_of_label_graph = similarity_index_of_label_graph_class()
         >>> similarity_index_of_label_graph(G1, G2)
-        0.5925135061949895
+        0.7651719671571124
         >>> similarity_index_of_label_graph(G1, G3)
-        -0.9677390108526409
+        -0.8580896120374933
         >>> similarity_index_of_label_graph(G2, G4)
-        -0.9041961423870752
+        -0.8440113193737153
         >>> similarity_index_of_label_graph(G3, G4)
-        0.5359512772554542
+        0.7314483604914666
     '''
     
     from networkx.classes.graph import Graph
@@ -71,7 +71,7 @@ class similarity_index_of_label_graph_class(object):
     from networkx.classes.multigraph import MultiGraph
     from networkx.classes.multidigraph import MultiDiGraph
     
-    version = '1.0.2'
+    version = '2.0.0'
     
     def __graph_embedding_vector(self, G, weight = None) -> dict:
         def convert_graph_to_node_frequence(G, weight = None) -> dict:
@@ -118,10 +118,34 @@ class similarity_index_of_label_graph_class(object):
         return convert_graph_to_node_frequence(G, weight)
 
     def __measure_func(self, vector_1: list, vector_2: list) -> float:
+        import numpy as np
+        from math import copysign
+        from math import sqrt
+        
         def pearson_correlation(u, v) -> float:
             from scipy.spatial.distance import correlation
             return -(correlation(u, v) - 1)
-        return pearson_correlation(vector_1, vector_2)
+        
+        vector_1 = np.array(vector_1)
+        vector_2 = np.array(vector_2)
+        
+        x = pearson_correlation(vector_1, vector_2)
+        
+        accumulated_frequency_1 = np.cumsum(vector_1)
+        accumulated_frequency_2 = np.cumsum(vector_2)
+        reverse_accumulated_frequency_1 = np.cumsum(np.flip(vector_1))
+        reverse_accumulated_frequency_2 = np.cumsum(np.flip(vector_2))
+        a = min(pearson_correlation(accumulated_frequency_1, accumulated_frequency_2), pearson_correlation(reverse_accumulated_frequency_1, reverse_accumulated_frequency_2))
+
+        accumulated_frequency_1 = np.cumsum(vector_1)
+        accumulated_frequency_2 = np.cumsum(np.flip(vector_2))
+        reverse_accumulated_frequency_1 = np.cumsum(np.flip(vector_1))
+        reverse_accumulated_frequency_2 = np.cumsum(vector_2)
+        b = min(pearson_correlation(accumulated_frequency_1, accumulated_frequency_2), pearson_correlation(reverse_accumulated_frequency_1, reverse_accumulated_frequency_2))
+        
+        y = max(a, b)
+        
+        return copysign(sqrt(abs(x) * y), x)
 
     def __call__(self, G1, G2, weight = None) -> float:
         def frequency_dict_to_label_order_vector(frequency_dict) -> list:
