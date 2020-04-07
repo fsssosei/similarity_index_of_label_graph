@@ -23,7 +23,7 @@ with open("README.md", encoding='utf-8') as fh:
 
 setup(
     name='similarity_index_of_label_graph',
-    version='1.0.2',
+    version='2.0.0',
     description='calculate the similarity index of the label graph pairs package in python.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -41,5 +41,5 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),
     include_package_data=True,
-    install_requires=['networkx>=2.4', 'scipy>=1.2.1']
+    install_requires=['networkx>=2.4', 'numpy>=1.18.2', 'scipy>=1.4.1']
 )
